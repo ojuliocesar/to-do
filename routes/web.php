@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [ HomeController::class, 'index'])->name('home');
+
+Route::prefix('task')->group(function() {
+
+    Route::get('/', [TaskController::class, 'index'])->name('task.show');
+    Route::get('/new', [TaskController::class, 'create'])->name('task.create');
+    Route::get('/update', [TaskController::class, 'update'])->name('task.update');
+
 });
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
