@@ -1,20 +1,20 @@
-.btn {
+.main-button {
     padding: 20px 30px;
-
     border-radius: 10px;
+    border: none;
 
+    cursor: pointer;
     transition: transform 130ms ease-in-out;
+
+    color: #fff;
+    font-size: 16px;
+    
 }
 
-.btn:hover {
+a.main-button:hover {
     transform: scale(1.04);
 }
 
-a.btn {
+a.main-button {
     text-decoration: none;
-}
-
-.btn-primary {
-    background-color: var(--color-primary);
-    color: #fff;
 }

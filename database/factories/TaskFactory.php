@@ -23,7 +23,8 @@ class TaskFactory extends Factory
         return [
             'title' => $this->faker->text(30),
             'description' => $this->faker->text(50),
-            'vue_date' => $this->faker->dateTime(),
+            'due_date' => $this->faker->dateTime(),
+            'is_done' => $this->faker->boolean(),
             'category_id' => $category['id'],
             'user_id' => Category::find($category['id'])->user
         ];

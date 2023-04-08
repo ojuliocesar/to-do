@@ -19,7 +19,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->dateTime('vue_date');
+            $table->dateTime('due_date');
+            $table->boolean('is_done')->default(false);
             $table->foreignIdFor(User::class)->references('id')->on('users');
             $table->foreignIdFor(Category::class)->references('id')->on('categories');
             $table->timestamps();

@@ -23,7 +23,7 @@ Route::prefix('task')->group(function() {
 
     Route::get('/', [TaskController::class, 'index'])->name('task.show');
     Route::get('/new', [TaskController::class, 'create'])->name('task.create');
-    Route::get('/update', [TaskController::class, 'update'])->name('task.update');
+    Route::get('/update/{id}', [TaskController::class, 'update'])->name('task.update');
 
 });
 

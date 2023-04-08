@@ -1,1 +1,1 @@
-<a href="{{$url}}" class="btn btn-primary" style="background-color: {{$color ?? 'var(--color-primary)'}}">{{$slot}}</a>
+<a href="{{$url}}" class="main-button" style="background-color: {{$color ?? 'var(--color-primary)'}}">{{$slot}}</a>
