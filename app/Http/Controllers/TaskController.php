@@ -48,11 +48,29 @@ class TaskController extends Controller
 
     public function updateAction(Request $r)
     {
-        echo 'oi';
+        $dataTask = $r->only(['title', 'due_date', 'category_id', 'description']);
+
+        $task = Task::find($r->id);
+
+        if (!$task) {
+            return redirect('/');
+        }
+        
+        $task->update($dataTask);
+
+        $task->save();
+
+        return redirect("/task/update/" . $task->id);
     }
 
-    public function delete()
+    public function delete(Request $r)
     {
-        echo 'oi';
+        $task = Task::find($r->id);
+
+        if ($task) {
+            $task->delete();
+        }
+
+        return redirect('/');
     }
 }
