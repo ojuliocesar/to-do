@@ -5,7 +5,31 @@
 @endsection
 
 @section('content')
-    <h2>Login</h2>
+    <section id="section-login" class="center">
+        <h1>Autenticação</h1>
 
-    <a href="{{route('home')}}">Voltar para Home</a>
+        <form class="main-form" action="{{route('auth.loginAction')}}" method="POST">
+
+            @csrf
+
+            @include('components.form.alert')
+
+            @include('components.form.input', [
+                'id' => 'email',
+                'title' => 'Seu e-mail',
+                'type' => 'email'
+            ])
+
+            @include('components.form.input', [
+                'id' => 'password',
+                'title' => 'Senha',
+                'type' => 'password'
+            ])
+
+            <div class="button-wrapper">
+                <x-form.button type="reset">Limpar</x-form.button>
+                <x-form.button>Entrar</x-form.button>
+            </div>
+        </form>
+    </section>  
 @endsection

@@ -17,14 +17,17 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', [ HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function() {
+    
+    Route::get('/', [ HomeController::class, 'index'])->name('home');
 
-Route::prefix('task')->group(function() {
+    Route::prefix('task')->group(function() {
 
-    Route::get('/', [TaskController::class, 'index'])->name('task.show');
-    Route::get('/new', [TaskController::class, 'create'])->name('task.create');
-    Route::get('/update/{id}', [TaskController::class, 'update'])->name('task.update');
-
+        Route::get('/', [TaskController::class, 'index'])->name('task.show');
+        Route::get('/new', [TaskController::class, 'create'])->name('task.create');
+        Route::get('/update/{id}', [TaskController::class, 'update'])->name('task.update');
+    
+    });
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');

@@ -101,14 +101,14 @@
     gap: 20px;
 }
 
-.main-tasks-wrapper .main-list-tasks li .title-wrapper input {
+.main-tasks-wrapper .main-list-tasks li .doneCheckbox {
     width: 17px;
     height: 17px;
 
     accent-color: var(--color-primary);
 }
 
-.main-tasks-wrapper .main-list-tasks li .title-wrapper input:checked:before {
+.main-tasks-wrapper .main-list-tasks li .title-wrapper .doneCheckbox:checked:before {
     background-color: red;
 }
 

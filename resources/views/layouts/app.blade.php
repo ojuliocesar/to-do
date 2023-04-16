@@ -28,7 +28,7 @@
 <body>
     <div class="container">
         <aside>
-            <img class="logo" src="{{asset('assets/images/logo.png')}}" alt="Logo To-Do">
+            <a href="{{route('home')}}"><img class="logo" src="{{asset('assets/images/logo.png')}}" alt="Logo To-Do"></a>
         </aside>
         
         <div class="content">
@@ -42,5 +42,13 @@
             </main>
         </div>
     </div>
+
+<script>
+    var url = "{{url('/')}}";
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="{{asset('assets/js/script.js')}}"></script>
 </body>
 </html>

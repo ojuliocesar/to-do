@@ -2,6 +2,7 @@
 
 @section('header')
     <x-button url="{{route('task.create')}}">Criar Tarefa</x-button>
+    <x-button url="{{route('logout')}}">Sair</x-button>
 @endsection
 
 @section('content')
@@ -37,7 +38,7 @@
                 @foreach ($tasks as $task)
                     <li>
                         <div class="title-wrapper">
-                            <input type="checkbox" {{$task->is_done == true ? 'checked' : ''}}>
+                            <input data-task-id="{{$task->id}}" class="doneCheckbox" type="checkbox" {{$task->is_done == true ? 'checked' : ''}}>
                             <h3>{{$task->title}}</h3>
                         </div>
     

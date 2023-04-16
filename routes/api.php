@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,22 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::prefix('task')->group(function() {
-    Route::post('/create', [TaskController::class, 'createAction'])->name('task.createAction');
+Route::middleware('auth')->group(function() {
+
+    Route::prefix('task')->group(function() {
+        Route::post('/create', [TaskController::class, 'createAction'])->name('task.createAction');
+        
+        Route::post('/update/{id}', [TaskController::class, 'updateAction'])->name('task.updateAction');
+        
+        Route::get('/delete/{id}', [TaskController::class, 'delete'])->name('task.delete');
     
-    Route::post('/update/{id}', [TaskController::class, 'updateAction'])->name('task.updateAction');
-    
-    Route::get('/delete/{id}', [TaskController::class, 'delete'])->name('task.delete');
+        Route::post('/isDone', [TaskController::class, 'isDone']);
+    });
+
+});
+
+Route::prefix('auth')->group(function() {
+    Route::post('/register', [AuthController::class, 'registerAction'])->name('auth.registerAction');
+    Route::post('/login', [AuthController::class, 'loginAction'])->name('auth.loginAction');
+    Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 });

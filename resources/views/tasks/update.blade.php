@@ -5,10 +5,11 @@
 @endsection
 
 @section('content')
-    <section id="section-task-create">
+    <section id="section-task-update" class="center">
         <h1>Atualizar Tarefa</h1>
 
         <form class="main-form" method="POST" action="{{route('task.updateAction', ['id' => $task->id])}}">
+
             @include('components.form.input', [
                 'id' => 'title', 
                 'title' => 'Título da Tarefa',
@@ -41,7 +42,7 @@
             ])
             
             <div class="button-wrapper">
-                <x-form.button type="reset">Voltar</x-form.button>
+                <x-form.button type="reset">Cancelar</x-form.button>
 
                 <x-form.button>Atualizar</x-form.button>
             </div>

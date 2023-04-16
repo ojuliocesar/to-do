@@ -30,7 +30,7 @@ class TaskController extends Controller
 
         Task::create($taskData);
 
-        return redirect('/');
+        return redirect(route('home'));
     }
 
     public function update(Request $r)
@@ -38,7 +38,7 @@ class TaskController extends Controller
         $data['task'] = Task::find($r->id);
 
         if (!$data['task']) {
-            return redirect('/');
+            return redirect(route('home'));
         }
         
         $data['categories'] = Category::all();
@@ -53,14 +53,27 @@ class TaskController extends Controller
         $task = Task::find($r->id);
 
         if (!$task) {
-            return redirect('/');
+            return redirect(route('home'));
         }
         
         $task->update($dataTask);
 
         $task->save();
 
-        return redirect("/task/update/" . $task->id);
+        return redirect(route('task.update', ['id' => $r->id]));
+    }
+
+    public function isDone(Request $r)
+    {
+        $task = Task::find($r->taskId);
+
+        if (!$task) {
+            return redirect(route('home'));
+        }
+
+        $task->is_done = !$task->is_done;
+
+        $task->save();
     }
 
     public function delete(Request $r)
@@ -71,6 +84,6 @@ class TaskController extends Controller
             $task->delete();
         }
 
-        return redirect('/');
+        return redirect(route('home'));
     }
 }

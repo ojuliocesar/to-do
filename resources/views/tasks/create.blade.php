@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <section id="section-task-create">
+    <section id="section-task-create" class="center">
         <h1>Criar Tarefa</h1>
 
         <form class="main-form" method="POST" action="{{route('task.createAction')}}">
