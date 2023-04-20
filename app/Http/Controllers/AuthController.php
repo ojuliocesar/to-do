@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
@@ -28,7 +29,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:4'
         ]);
-
+        
         $authUser = Auth::attempt($loginData);
 
         if ($authUser) {
@@ -60,9 +61,15 @@ class AuthController extends Controller
             'password' => 'required|min:4|confirmed'
         ]);
 
-        $dataAuth['password'] = Hash::make($dataAuth['password']);
+        $password = $dataAuth['password'];
 
+        $dataAuth['password'] = Hash::make($dataAuth['password']);
+        
         User::create($dataAuth);
+
+        $dataAuth['password'] = $password;
+
+        Auth::attempt($dataAuth);
 
         return redirect(route('home'));
     }

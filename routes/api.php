@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function() {
     
         Route::post('/isDone', [TaskController::class, 'isDone']);
     });
+
+    Route::post('/alterDate', [HomeController::class, 'alterDate']);
 
 });
 

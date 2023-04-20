@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->text(30),
+            'title' => $this->faker->text(50),
             'color' => $this->faker->safeHexColor(),
             'user_id' => User::all()->random()
         ];

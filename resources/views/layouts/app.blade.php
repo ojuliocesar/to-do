@@ -21,9 +21,6 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
-
-    {{-- Tasks --}}
-    <link rel="stylesheet" href="{{asset('assets/css/tasks/create.css')}}">
 </head>
 <body>
     <div class="container">

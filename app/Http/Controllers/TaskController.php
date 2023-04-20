@@ -64,7 +64,8 @@ class TaskController extends Controller
     }
 
     public function isDone(Request $r)
-    {
+    {   
+
         $task = Task::find($r->taskId);
 
         if (!$task) {

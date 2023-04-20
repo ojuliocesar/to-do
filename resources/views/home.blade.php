@@ -12,9 +12,9 @@
                 <h2>Progresso do Dia</h2>
     
                 <div class="date-wrapper">
-                    <img src="{{asset('assets/images/icon-prev.png')}}" alt="Prev Icon">
-                    <small>13 de Dez</small>
-                    <img src="{{asset('assets/images/icon-next.png')}}" alt="Next Icon">
+                    <img data-action="prev" src="{{asset('assets/images/icon-prev.png')}}" alt="Prev Icon">
+                    <small data-date="{{$date}}">{{$dateString}}</small>
+                    <img data-action="next" src="{{asset('assets/images/icon-next.png')}}" alt="Next Icon">
                 </div>
             </div>
     
@@ -31,7 +31,9 @@
     
         <div class="main-tasks-wrapper">
             <select>
-                <option value="1">Todas as Tarefas</option>
+                <option value="allTasks">Todas as Tarefas</option>
+                <option value="pendingTasks">Tarefas Pendentes</option>
+                <option value="finishedTasks">Tarefas Realizadas</option>
             </select>
     
             <ul class="main-list-tasks">
