@@ -1,16 +1,5 @@
 $(document).ready(function() {
 
-    alterQueryString();
-
-    function alterQueryString() {
-        
-        let queryDate = $('.main-graphic-wrapper .date-wrapper small').data('date');
-
-        let queryFilter = $('.main-tasks-wrapper select').val();
-
-        history.pushState({}, null, `?date=${queryDate}&filter=${queryFilter}`);
-    }
-
     $('body').on('change', '.main-tasks-wrapper .main-list-tasks li .doneCheckbox', function() {
     
         var doneCheckbox = $(this);
@@ -164,3 +153,12 @@ $(document).ready(function() {
 
     $('.main-tasks-wrapper select, .main-graphic-wrapper .date-wrapper small').change(alterQueryString);
 });
+
+function alterQueryString() {
+    
+    let queryDate = $('.main-graphic-wrapper .date-wrapper small').data('date');
+
+    let queryFilter = $('.main-tasks-wrapper select').val();
+
+    history.pushState({}, null, `?date=${queryDate}&filter=${queryFilter}`);
+}

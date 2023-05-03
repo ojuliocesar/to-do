@@ -37,7 +37,7 @@ class AuthController extends Controller
             return redirect(route('home'));
         } else {
             
-            return redirect(route('login'));
+            return redirect(route('login'))->withErrors('E-mail ou Senha inválidos! Verifique e tente Novamente');
         }
 
     }
