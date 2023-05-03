@@ -31,36 +31,40 @@
     
         <div class="main-tasks-wrapper">
             <select>
-                <option value="allTasks">Todas as Tarefas</option>
-                <option value="pendingTasks">Tarefas Pendentes</option>
-                <option value="finishedTasks">Tarefas Realizadas</option>
+                <option value="allTasks" {{$filter == 'allTasks' ? 'selected' : ''}}>Todas as Tarefas</option>
+                <option value="pendingTasks" {{$filter == 'pendingTasks' ? 'selected' : ''}}>Tarefas Pendentes</option>
+                <option value="finishedTasks" {{$filter == 'finishedTasks' ? 'selected' : ''}}>Tarefas Realizadas</option>
             </select>
     
             <ul class="main-list-tasks">
-                @foreach ($tasks as $task)
-                    <li>
-                        <div class="title-wrapper">
-                            <input data-task-id="{{$task->id}}" class="doneCheckbox" type="checkbox" {{$task->is_done == true ? 'checked' : ''}}>
-                            <h3>{{$task->title}}</h3>
-                        </div>
-    
-                        <div class="content-action-wrapper">
-                            <div class="content-task">
-                                <p>{{$task->description}}</p>
+                @if (count($tasks))
+                    @foreach ($tasks as $task)
+                        <li>
+                            <div class="title-wrapper">
+                                <input data-task-id="{{$task->id}}" class="doneCheckbox" type="checkbox" {{$task->is_done == true ? 'checked' : ''}}>
+                                <h3>{{$task->title}}</h3>
                             </div>
-        
-                            <div class="actions">
-                                <a href="{{route('task.update', ['id' => $task->id])}}">
-                                    <img src="{{asset('assets/images/icon-edit.png')}}" alt="Icon Edit">
-                                </a>
-        
-                                <a href="{{route('task.delete', ['id' => $task->id])}}">
-                                    <img src="{{asset('assets/images/icon-delete.png')}}" alt="Icon Edit">
-                                </a>
+
+                            <div class="content-action-wrapper">
+                                <div class="content-task">
+                                    <p>{{$task->description}}</p>
+                                </div>
+            
+                                <div class="actions">
+                                    <a href="{{route('task.update', ['id' => $task->id])}}">
+                                        <img src="{{asset('assets/images/icon-edit.png')}}" alt="Icon Edit">
+                                    </a>
+            
+                                    <a href="{{route('task.delete', ['id' => $task->id])}}">
+                                        <img src="{{asset('assets/images/icon-delete.png')}}" alt="Icon Edit">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                @endforeach
+                        </li>
+                    @endforeach
+                @else
+                    Nenhuma task definida para este dia
+                @endif
             </ul>
         </div>
     </section>

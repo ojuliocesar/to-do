@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::post('/alterDate', [HomeController::class, 'alterDate']);
+    Route::post('/alterFilter', [HomeController::class, 'alterFilter']);
 
 });
 

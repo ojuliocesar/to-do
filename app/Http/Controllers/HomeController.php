@@ -11,19 +11,58 @@ use App\Models\Task;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $r)
     {
 
-        // Filtro das Tasks
-        $filteredDate = date('Y-m-d');
 
-        $data['tasks'] = Task::whereDate('due_date', $filteredDate)->get();
+        $isValidDate = Carbon::canBeCreatedFromFormat($r->date, 'Y-m-d');
+
+        $filterValues = [
+            'allTasks',
+            'pendingTasks',
+            'finishedTasks'
+        ];
+
+        $isValidFilter = array_search($r->filter, $filterValues);
+
+        // Filtro das Tasks
+        $filteredDate = $isValidDate ? $r->date : date('Y-m-d');
+
+        $filterStatus = $isValidFilter ? $r->filter : $filterValues[0];
+
+        // $data['tasks'] = Task::whereDate('due_date', $filteredDate)->get();
+
+        if ($filterStatus != 'allTasks') {
+
+            $isDone = false;
+
+            switch ($filterStatus) {
+                case 'pendingTasks':
+
+                    $isDone = false;
+                    break;
+                
+                case 'finishedTasks':
+
+                    $isDone = true;
+                    break;
+            }
+
+            $data['tasks'] = Task::where('is_done', $isDone)
+                ->whereDate('due_date', $filteredDate)->get();
+
+        } else {
+
+            $data['tasks'] = Task::whereDate('due_date', $filteredDate)->get();
+        }
 
         // Datas e Valores
         $carbonDate = Carbon::createFromDate($filteredDate);
 
         $data['dateString'] = $carbonDate->translatedFormat('d \d\e M');
         $data['date'] = $carbonDate->translatedFormat('Y-m-d');
+
+        $data['filter'] = $filterStatus;
 
         return view('home', $data);
     }
@@ -44,9 +83,62 @@ class HomeController extends Controller
         $data['dateString'] = $carbonDate->translatedFormat('d \d\e M');
 
         $data['date'] = $carbonDate->translatedFormat('Y-m-d');
-        
-        $data['tasks'] = Task::whereDate('due_date', $data['date'])->get();
+
+        if ($r->filter != 'allTasks') {
+
+            $isDone = false;
+
+            switch ($r->filter) {
+                case 'pendingTasks':
+
+                    $isDone = false;
+                    break;
+                
+                case 'finishedTasks':
+
+                    $isDone = true;
+                    break;
+            }
+
+            $data['tasks'] = Task::where('is_done', $isDone)
+                ->whereDate('due_date', $data['date'])->get();
+                
+            } else {
+                
+            $data['tasks'] = Task::whereDate('due_date', $data['date'])->get();
+        }
 
         return $data;
+    }
+
+    public function alterFilter(Request $r)
+    {
+       
+        if ($r->filter != 'allTasks') {
+
+            $isDone = false;
+
+            switch ($r->filter) {
+                case 'pendingTasks':
+
+                    $isDone = false;
+                    break;
+                
+                case 'finishedTasks':
+
+                    $isDone = true;
+                    break;
+            }
+
+            $data['tasks'] = Task::where('is_done', $isDone)
+                ->whereDate('due_date', $r->date)->get();
+                
+            } else {
+                
+            $data['tasks'] = Task::whereDate('due_date', $r->date)->get();
+        }
+
+        return $data;
+
     }
 }
